@@ -565,6 +565,43 @@ function sumpoints($gendate,$accounts_id)
 {
 	$q = "SELECT SUM(points) as sumpoints FROM tbl_buyproduct_history WHERE accounts_id=$accounts_id and gendate_end='$gendate'";
 	$row = mysql_fetch_assoc(mysql_query($q));
+	if($row['sumpoints']=='')
+	{
+		$row['sumpoints'] = 0;
+	}
 	return $row['sumpoints'];
+}
+
+
+function getparentgen($child,$level)
+{
+    $query = "SELECT * FROM tbl_referdata WHERE level='$level' AND child='$child'";
+    #echo $query."<br>";
+	$row = mysql_fetch_array(mysql_query($query));
+	return $row['parent'];
+}
+
+function getlevelgen($child,$level)
+{
+	$checker = 0;
+	$dateny = dateny();
+	while($checker==0)
+	{
+		$parent =  getparentgen($child,$level);	
+		$sumpoints = sumpoints($dateny,$parent);
+		if($level==0)
+		{
+			return 1;
+		}
+		if($sumpoints>=400)
+		{
+			$checker = 1;
+		}
+		else
+		{
+			$level--;
+		}
+	}
+		return $level;
 }
 ?>
