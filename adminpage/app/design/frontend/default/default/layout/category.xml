@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+    </default>
+    <category_index_index>
+        <reference name="content">
+            <block type="category/category" name="category" template="category/category.phtml" />
+        </reference>
+    </category_index_index>
+</layout> 

@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category   Mind
+ * @package    Mind_Product
+ * @author     ModuleCreator
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+ -->
+<config>
+    <modules>
+        <Mind_Product>
+            <version>0.1.0</version>
+        </Mind_Product>
+    </modules>
+    <frontend>
+        <routers>
+            <product>
+                <use>standard</use>
+                <args>
+                    <module>Mind_Product</module>
+                    <frontName>product</frontName>
+                </args>
+            </product>
+        </routers>
+        <layout>
+            <updates>
+                <product>
+                    <file>product.xml</file>
+                </product>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<product>
+				<use>admin</use>
+				<args>
+					<module>Mind_Product</module>
+					<frontName>product</frontName>
+				</args>
+			</product>
+        </routers>
+    </admin>
+    <adminhtml>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<Mind_Product>
+							<title>Product Module</title>
+							<sort_order>10</sort_order>
+						</Mind_Product>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<product>
+					<file>product.xml</file>
+				</product>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <product>
+                <class>Mind_Product_Model</class>
+                <resourceModel>product_mysql4</resourceModel>
+            </product>
+            <product_mysql4>
+                <class>Mind_Product_Model_Mysql4</class>
+                <entities>
+                    <product>
+                        <table>product</table>
+                    </product>
+                </entities>
+            </product_mysql4>
+        </models>
+        <resources>
+            <product_setup>
+                <setup>
+                    <module>Mind_Product</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </product_setup>
+            <product_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </product_write>
+            <product_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </product_read>
+        </resources>
+        <blocks>
+            <product>
+                <class>Mind_Product_Block</class>
+            </product>
+        </blocks>
+        <helpers>
+            <product>
+                <class>Mind_Product_Helper</class>
+            </product>
+        </helpers>
+    </global>
+</config>
